@@ -14,7 +14,7 @@ class Employee:
     def __init__(self, first, last, pay):
         self.first = first
         self.last = last
-        self.email = first + '.' + last + '@email.com'
+        # self.email = first + '.' + last + '@email.com'
         self.pay = pay
 
         # using the class reference insted of the self(instance reference) this increments for every instantiation of the class
@@ -34,8 +34,22 @@ class Employee:
     def __len__(self):
         return len(self.fullname())
 
+    @property  # allows us to use a setter to grab the correct values
     def fullname(self):
         return '{} {}'.format(self.first, self.last)
+
+    # use a setter to allow the method to change the attributes, when changed by an instance
+    @fullname.setter
+    def fullname(self, name):
+        first, last = name.split(' ')  # splits name into two parts
+        self.first = first
+        self.last = last
+
+    @fullname.deleter
+    def fullname(self):
+        print('Delete Name!')
+        self.first = None
+        self.last = None
 
     def apply_raise(self):
         # or Employee.raise_amount, but using self gives us the ability to change that amount for any instance of Employee that would choose to add the raise_amount variable to
@@ -58,6 +72,11 @@ class Employee:
         if day.weekday() == 5 or day.weekday() == 6:
             return False
         return True
+
+    # Decorators - this is a method that acts like an attribut. the email is called like an attribut and not a function.
+    @property
+    def email(self):
+        return '{}.{}@email.com'.format(self.first, self.last)
 
 
 class Developer(Employee):
@@ -98,8 +117,12 @@ class Manager(Employee):
 emp_1 = Employee('Pat', 'Palmerston', 50000)
 emp_2 = Employee('Leroy', 'Jenkins', 100000)
 
-print(emp_1 + emp_2)
-print(len(emp_1))
+emp_1.fullname = 'nithal roy'
+del emp_2.fullname
+
+# print(emp_1 + emp_2)
+# print(len(emp_1))
+# print(emp_1.fullname)
 
 # print(repr(emp_1))
 # print(str(emp_1))
