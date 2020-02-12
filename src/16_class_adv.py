@@ -20,6 +20,20 @@ class Employee:
         # using the class reference insted of the self(instance reference) this increments for every instantiation of the class
         Employee.num_of_emps += 1
 
+    # used for debugging - have the repr as a minimum as the str will use it as a fall back if it is not there. Try to display something you can copy and past back into python
+    def __repr__(self):
+        return "Employee('{}', '{}', {})".format(self.first, self.last, self.pay)
+
+    # used as a display to the end user
+    def __str__(self):
+        return '{} - {}'.format(self.fullname(), self.email)
+
+    def __add__(self, other):
+        return self.pay + other.pay
+
+    def __len__(self):
+        return len(self.fullname())
+
     def fullname(self):
         return '{} {}'.format(self.first, self.last)
 
@@ -51,7 +65,7 @@ class Developer(Employee):
 
     def __init__(self, first, last, pay, prog_lang):
         super().__init__(first, last, pay)
-        #Employee.__init__(self, first, last, pay)
+        # Employee.__init__(self, first, last, pay)
         self.prog_lang = prog_lang
 
 
@@ -76,19 +90,28 @@ class Manager(Employee):
             print('---->', emp.fullname())
 
 
-dev_1 = Developer('Pat', 'Palmerston', 50000, 'JS')
-dev_2 = Developer('Leroy', 'Jenkins', 100000, 'Python')
+# dev_1 = Developer('Pat', 'Palmerston', 50000, 'JS')
+# dev_2 = Developer('Leroy', 'Jenkins', 100000, 'Python')
 
-mgr_1 = Manager('Sue', 'Smith', 90000, [dev_1])
+# mgr_1 = Manager('Sue', 'Smith', 90000, [dev_1])
+
+emp_1 = Employee('Pat', 'Palmerston', 50000)
+emp_2 = Employee('Leroy', 'Jenkins', 100000)
+
+print(emp_1 + emp_2)
+print(len(emp_1))
+
+# print(repr(emp_1))
+# print(str(emp_1))
 
 # isinstance will tell us if an object is an instance of a class
-print(isinstance(mgr_1, Manager))  # True
-print(isinstance(mgr_1, Employee))  # True
-print(isinstance(mgr_1, Developer))  # False
+# print(isinstance(mgr_1, Manager))  # True
+# print(isinstance(mgr_1, Employee))  # True
+# print(isinstance(mgr_1, Developer))  # False
 
 # issubclass will tell us if an object is an instance of a subclass
-print(issubclass(Manager, Employee))  # True
-print(issubclass(Manager, Developer))  # False
+# print(issubclass(Manager, Employee))  # True
+# print(issubclass(Manager, Developer))  # False
 
 
 # print(mgr_1.email)
