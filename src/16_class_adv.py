@@ -43,16 +43,38 @@ class Employee:
         return True
 
 
-emp_1 = Employee('Pat', 'Palmerston', 50000)
-emp_2 = Employee('Leroy', 'Jenkins', 100000)
+class Developer(Employee):
+    raise_amount = 1.20
 
-my_date = datetime.date(2016, 7, 11)
-print(Employee.is_workday(my_date))
+    def __init__(self, first, last, pay, prog_lang)
+    super().__init__(first, last, pay)
+    #Employee.__init__(self, first, last, pay)
+
+
+dev_1 = Developer('Pat', 'Palmerston', 50000)
+dev_2 = Developer('Leroy', 'Jenkins', 100000)
+
+# print(help(Developer))
+
+# print(dev_1.email)
+# print(dev_2.email)
+print(dev_1.pay)
+dev_1.apply_raise()
+print(dev_1.pay)
+
+# These are all notes and tests pre sub classes
+
+
+# emp_1 = Employee('Pat', 'Palmerston', 50000)
+# emp_2 = Employee('Leroy', 'Jenkins', 100000)
+
+# my_date = datetime.date(2016, 7, 11)
+# print(Employee.is_workday(my_date))
 
 # creates raise amount on the emp_1 instance
 # emp_1.raise_amount = 1.10
 
-Employee.set_raise_amt(1.05)
+# Employee.set_raise_amt(1.05)
 
 # print(Employee.raise_amount)
 # emp_1.apply_raise()
